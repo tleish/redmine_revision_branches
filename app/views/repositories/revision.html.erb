@@ -1,0 +1,11 @@
+<%
+    original_partial = File.join(Rails.root, 'app' ,'views', 'repositories', 'revision.html.erb')
+    html = capture { render file: original_partial }
+
+    if @changeset.scmid.present?
+      html = linkify_id(html)
+      html = insert_branches_detail(html)
+    end
+%>
+
+<%= html %>
