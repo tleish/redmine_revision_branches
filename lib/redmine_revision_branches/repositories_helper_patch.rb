@@ -2,16 +2,12 @@
 
 RepositoriesHelper.class_eval do
 
-  def repository_name
-    @repository_name ||= @repository.identifier.present? ? @repository.identifier_param : ''
-  end
-
   def linkify_id(html)
     return html unless @repository.identifier.present?
     revision_link = link_to(@rev, {:controller => 'repositories',
                                    :action => 'show',
                                    :id => @project,
-                                   :repository_id => repository_name,
+                                   :repository_id => @repository.identifier,
                                    :path => to_path_param(@path),
                                    :rev => @rev})
     html.sub(content_tag(:td, @rev), content_tag(:td, revision_link)).html_safe
@@ -32,7 +28,7 @@ RepositoriesHelper.class_eval do
     content_tag(:tr) do
       td = content_tag(:td, "#{l(:label_branch)}&nbsp;&nbsp;&nbsp;".html_safe)
       td << content_tag(:td) do
-        branch_html = content_tag(:b, "#{repository_name}@ ")
+        branch_html = content_tag(:b, "#{@repository.identifier}@ ")
         branch_html << links_to_branches.join(', ').html_safe
       end
     end
@@ -44,10 +40,9 @@ RepositoriesHelper.class_eval do
       link_to(branch, {:controller => 'repositories',
                        :action => 'show',
                        :id => @project,
-                       :repository_id => repository_name,
+                       :repository_id => @repository.identifier,
                        :path => to_path_param(@path),
-                       :branch => branch,
-                       :rev => nil}) if @repository.identifier.present?
+                       :rev => branch})
     end
   end
 end
