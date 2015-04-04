@@ -26,7 +26,7 @@ RepositoriesHelper.class_eval do
 
   def branches_html
     content_tag(:tr) do
-      td = content_tag(:td, "#{l(:label_branch)}&nbsp;&nbsp;&nbsp;".html_safe)
+      td = content_tag(:td, "#{l(:label_branch)}&nbsp;&nbsp;&nbsp;".html_safe, valign: 'top')
       td << content_tag(:td) do
         branch_html = content_tag(:b, "#{@repository.identifier}@ ")
         branch_html << links_to_branches.join(', ').html_safe
@@ -36,7 +36,7 @@ RepositoriesHelper.class_eval do
 
   def links_to_branches
     return [] unless has_branch_detail?
-    @repository.scm.branch_contains(@rev).map do |branch|
+    @repository.scm.branch_contains(@rev).sort_by(&:length).map do |branch|
       link_to(branch, {:controller => 'repositories',
                        :action => 'show',
                        :id => @project,
