@@ -1,3 +1,16 @@
+<style type="text/css">
+  .scm-branch-group, .scm-branch-hide > .scm-branches { display: none; }
+  .scm-branch-hide > .scm-branch-group { display: inline; }
+</style>
+
+<script type="text/javascript">
+  $(function() {
+    $('a.scm-branch-group').on('click', function() {
+      $(this).parent().removeClass('scm-branch-hide');
+    })
+  });
+</script>
+
 <%
     original_partial = File.join(Rails.root, 'app' ,'views', 'repositories', 'revision.html.erb')
     html = capture { render file: original_partial }

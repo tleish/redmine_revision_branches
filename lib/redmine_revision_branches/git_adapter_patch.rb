@@ -6,10 +6,11 @@ module Redmine
       class GitAdapter
         def branch_contains(hash)
           cleaned_hash = hash.sub(/[^\w]/, '')
-          cmd_args = ['branch', '--contains', cleaned_hash]
-          git_cmd(cmd_args) do |io|
+          cmd_args = ['branch', '-r', '--contains', cleaned_hash]
+          branches = git_cmd(cmd_args) do |io|
             io.readlines.sort!.map{|t| t.strip.gsub(/\* ?/, '')}
           end
+          branches.map { |branch| branch.split('/').last }.uniq
         end
       end
     end

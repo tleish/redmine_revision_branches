@@ -36,13 +36,35 @@ RepositoriesHelper.class_eval do
 
   def links_to_branches
     return [] unless has_branch_detail?
-    @repository.scm.branch_contains(@rev).sort_by(&:length).map do |branch|
-      link_to(branch, {:controller => 'repositories',
-                       :action => 'show',
-                       :id => @project,
-                       :repository_id => @repository.identifier,
-                       :path => to_path_param(@path),
-                       :rev => branch})
+    branch_groups.map { |name, branches| branches_link(name, branches) }
+  end
+
+  def branches_link(name, branches)
+    return branch_link(branches.first) if branches.length == 1
+    link =  link_to("[#{name}...]", 'javascript:;', class: 'scm-branch-group').html_safe
+    content_tag(:span, class: 'scm-branch-hide') do
+      link << content_tag(:span, class: 'scm-branches') do
+        branches.map { |branch| branch_link(branch) }.join(', ').html_safe
+      end
     end
   end
+
+  def branch_link(branch)
+    link_to(branch, {:controller => 'repositories',
+                     :action => 'show',
+                     :id => @project,
+                     :repository_id => @repository.identifier,
+                     :path => to_path_param(@path),
+                     :rev => branch}).html_safe
+  end
+
+  def branch_groups
+    @repository.scm.branch_contains(@rev).group_by do |branch|
+      branch.downcase
+        .gsub(/^\d+/, '#####')
+        .split(/[\-\._]/)
+        .first
+    end.sort_by { |name, branches| [branches.length, name] }
+  end
+
 end
