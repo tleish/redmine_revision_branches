@@ -1,0 +1,32 @@
+<% settings = {} unless settings.is_a? Hash %>
+<h2>Display Branches</h2>
+<table>
+  <tbody>
+
+  <tr>
+    <td>
+      <%= check_box_tag 'settings[display_under_single_revision]', true, !!settings[:display_under_single_revision] %>
+    </td>
+
+    <th align="left">Under Single Revision</th>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>The single revision information can be found by clicking on a single revision under "associated revisions".</td>
+  </tr>
+
+  <tr><td>&nbsp;</td></tr>
+
+  <tr>
+    <td>
+      <%= check_box_tag 'settings[display_under_associated_revisions]', true, !!settings[:display_under_associated_revisions] %>
+    </td>
+    <th align="left">Under Associated Revisions</th>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>The associated revisions are found at the right of each Redmine ticket page.<br/><b>Warning:</b> enabling under associated revisions may slow down the performance of the Redmine ticket pages.</td>
+  </tr>
+
+  </tbody>
+</table>

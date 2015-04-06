@@ -1,19 +1,33 @@
+<%
+   if !!plugin_redmine_revision_branches(:display_under_associated_revisions)
+     content_for :header_tags do
+       javascript_include_tag('redmine_revision_branches.js', plugin: 'redmine_revision_branches') + "\n" +
+         stylesheet_link_tag('redmine_revision_branches.css', plugin: 'redmine_revision_branches') + "\n"
+     end
+   end
+%>
+
 <% changesets.each do |changeset| %>
-    <%
-        @repository = changeset.repository
-        @rev = changeset.identifier
-    %>
-    <div class="changeset <%= cycle('odd', 'even') %>">
+  <div class="changeset <%= cycle('odd', 'even') %>">
     <p>
       <%= link_to_revision(changeset, changeset.repository, :text => "#{l(:label_revision)} #{changeset.format_identifier}") %>
-      @
-      <%= link_to(@repository.identifier, {:controller => 'repositories', :action => 'show', :id => @project, :repository_id => @repository.identifier, :path => to_path_param(@path)}) %>
-      (<em><%= l(:label_branch) %>: <%= links_to_branches.join(', ').html_safe %></em>)
+
+
+      <% if !!plugin_redmine_revision_branches(:display_under_associated_revisions) && changeset.scmid.present?
+           @repository = changeset.repository
+           @rev = changeset.identifier
+      %>
+        @
+        <%= link_to(@repository.identifier, {:controller => 'repositories', :action => 'show', :id => @project, :repository_id => @repository.identifier, :path => to_path_param(@path)}) %>
+        (<em><%= l(:label_branch) %>: <%= links_to_branches.join(', ').html_safe %></em>)
+      <% end %>
+
+
       <br/>
       <span class="author"><%= authoring(changeset.committed_on, changeset.author) %></span>
     </p>
     <div class="wiki">
-        <%= textilizable(changeset, :comments) %>
+      <%= textilizable(changeset, :comments) %>
     </div>
-    </div>
+  </div>
 <% end %>

@@ -2,6 +2,11 @@
 
 RepositoriesHelper.class_eval do
 
+  def plugin_redmine_revision_branches(setting)
+    return nil unless Setting.plugin_redmine_revision_branches.is_a? Hash
+    Setting.plugin_redmine_revision_branches[setting]
+  end
+
   def linkify_id(html)
     return html unless @repository.identifier.present?
     revision_link = link_to(@rev, {:controller => 'repositories',
