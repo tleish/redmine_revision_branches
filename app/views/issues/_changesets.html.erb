@@ -18,7 +18,7 @@
            @rev = changeset.identifier
       %>
         @
-        <%= link_to(@repository.identifier, {:controller => 'repositories', :action => 'show', :id => @project, :repository_id => @repository.identifier, :path => to_path_param(@path)}) %>
+        <%= link_to(@repository.identifier, {:controller => 'repositories', :action => 'show', :id => @repository.project, :repository_id => @repository.identifier, :path => to_path_param(@path)}) %>
         (<em><%= l(:label_branch) %>: <%= links_to_branches.join(', ').html_safe %></em>)
       <% end %>
 

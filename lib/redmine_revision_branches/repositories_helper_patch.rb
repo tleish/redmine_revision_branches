@@ -11,7 +11,7 @@ RepositoriesHelper.class_eval do
     return html unless @repository.identifier.present?
     revision_link = link_to(@rev, {:controller => 'repositories',
                                    :action => 'show',
-                                   :id => @project,
+                                   :id => @repository.project,
                                    :repository_id => @repository.identifier,
                                    :path => to_path_param(@path),
                                    :rev => @rev})
@@ -57,7 +57,7 @@ RepositoriesHelper.class_eval do
   def branch_link(branch)
     link_to(branch, {:controller => 'repositories',
                      :action => 'show',
-                     :id => @project,
+                     :id => @repository.project,
                      :repository_id => @repository.identifier,
                      :path => to_path_param(@path),
                      :rev => branch}).html_safe
