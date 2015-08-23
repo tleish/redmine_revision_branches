@@ -14,7 +14,7 @@ module Redmine
           rescue ScmCommandAborted
             branches = Array.new
           end
-          branches
+          branches.uniq
         end
       end
     end
