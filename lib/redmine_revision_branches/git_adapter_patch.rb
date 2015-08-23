@@ -14,7 +14,7 @@ module Redmine
           rescue ScmCommandAborted
             branches = Array.new
           end
-          branches.map { |branch| branch.split('/').last }.uniq
+          branches
         end
       end
     end
