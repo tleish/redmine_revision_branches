@@ -11,7 +11,8 @@ module Redmine
             branches = git_cmd(cmd_args) do |io|
               io.readlines.sort!.map{|t| t.strip.gsub(/\* ?/, '')}
             end
-          rescue ScmCommandAborted
+          rescue ScmCommandAborted => e
+            logger.error("git log error: #{e.message}")
             branches = Array.new
           end
           branches.uniq
