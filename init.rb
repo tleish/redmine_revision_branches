@@ -6,7 +6,7 @@ Redmine::Plugin.register :redmine_revision_branches do
   author 'Thomas Leishman'
   description 'The Redmine Revision Branches plugin adds branch information to the revisions page, specifically for git.'
   version '0.3.0'
-  url 'https://github.com/tleish'
+  url 'https://github.com/tleish/redmine_revision_branches/'
   author_url 'https://github.com/tleish'
   settings :default => { display_under_single_revision: true, display_under_associated_revisions: false }, :partial => 'redmine_revision_branches/settings'
 end
