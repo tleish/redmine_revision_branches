@@ -5,7 +5,7 @@
 
   <tr>
     <td>
-      <%= check_box_tag 'settings[display_under_single_revision]', true, !!settings[:display_under_single_revision] %>
+      <%= check_box_tag 'settings[display_under_single_revision]', true, !!settings['display_under_single_revision'] %>
     </td>
 
     <th align="left">Under Single Revision</th>
@@ -19,7 +19,7 @@
 
   <tr>
     <td>
-      <%= check_box_tag 'settings[display_under_associated_revisions]', true, !!settings[:display_under_associated_revisions] %>
+      <%= check_box_tag 'settings[display_under_associated_revisions]', true, !!settings['display_under_associated_revisions'] %>
     </td>
     <th align="left">Under Associated Revisions</th>
   </tr>

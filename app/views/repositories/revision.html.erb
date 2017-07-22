@@ -3,7 +3,7 @@
    html = capture { render file: original_partial }
 %>
 
-<% if !!plugin_redmine_revision_branches(:display_under_single_revision) && @changeset.scmid.present?
+<% if !!plugin_redmine_revision_branches('display_under_single_revision') && @changeset.scmid.present?
      content_for :header_tags do
        javascript_include_tag('redmine_revision_branches.js', plugin: 'redmine_revision_branches') + "\n" +
          stylesheet_link_tag('redmine_revision_branches.css', plugin: 'redmine_revision_branches') + "\n"

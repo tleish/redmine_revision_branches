@@ -1,5 +1,5 @@
 <%
-   if !!plugin_redmine_revision_branches(:display_under_associated_revisions)
+   if !!plugin_redmine_revision_branches('display_under_associated_revisions')
      content_for :header_tags do
        javascript_include_tag('redmine_revision_branches.js', plugin: 'redmine_revision_branches') + "\n" +
          stylesheet_link_tag('redmine_revision_branches.css', plugin: 'redmine_revision_branches') + "\n"
@@ -13,7 +13,7 @@
       <%= link_to_revision(changeset, changeset.repository, :text => "#{l(:label_revision)} #{changeset.format_identifier}") %>
 
 
-      <% if !!plugin_redmine_revision_branches(:display_under_associated_revisions) && changeset.scmid.present?
+      <% if !!plugin_redmine_revision_branches('display_under_associated_revisions') && changeset.scmid.present?
            @repository = changeset.repository
            @rev = changeset.identifier
       %>
