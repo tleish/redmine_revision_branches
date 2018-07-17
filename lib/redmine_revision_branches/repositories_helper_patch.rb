@@ -55,12 +55,20 @@ RepositoriesHelper.class_eval do
   end
 
   def branch_link(branch)
-    link_to(branch, {:controller => 'repositories',
-                     :action => 'show',
-                     :id => @repository.project,
-                     :repository_id => @repository.identifier,
-                     :path => to_path_param(@path),
-                     :rev => branch}).html_safe
+    if @repository.scm_name == 'Subversion'
+      link_to(branch, {:controller => 'repositories',
+                       :action => 'show',
+                       :id => @repository.project,
+                       :repository_id => @repository.identifier,
+                       :path => to_path_param(branch)}).html_safe
+    else
+      link_to(branch, {:controller => 'repositories',
+                       :action => 'show',
+                       :id => @repository.project,
+                       :repository_id => @repository.identifier,
+                       :path => to_path_param(@path),
+                       :rev => branch}).html_safe
+    end
   end
 
   def branch_groups

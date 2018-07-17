@@ -1,5 +1,6 @@
 require_dependency 'redmine_revision_branches/git_adapter_patch'
 require_dependency 'redmine_revision_branches/mercurial_adapter_patch'
+require_dependency 'redmine_revision_branches/subversion_adapter_patch'
 require_dependency 'redmine_revision_branches/repositories_helper_patch'
 
 Redmine::Plugin.register :redmine_revision_branches do

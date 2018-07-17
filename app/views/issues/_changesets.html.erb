@@ -13,7 +13,7 @@
       <%= link_to_revision(changeset, changeset.repository, :text => "#{l(:label_revision)} #{changeset.format_identifier}") %>
 
 
-      <% if !!plugin_redmine_revision_branches('display_under_associated_revisions') && changeset.scmid.present?
+      <% if !!plugin_redmine_revision_branches('display_under_associated_revisions')
            @repository = changeset.repository
            @rev = changeset.identifier
       %>
