@@ -24,18 +24,17 @@ RepositoriesHelper.class_eval do
 
   def insert_branches_detail(html)
     return html unless has_branch_detail?
-    substring = '</tr>'
+    substring = '</li>'
     location = html.index(substring).to_i + substring.length
     html.insert(location, branches_html)
   end
 
   def branches_html
-    content_tag(:tr) do
-      td = content_tag(:td, "#{l(:label_branch)}&nbsp;&nbsp;&nbsp;".html_safe, valign: 'top')
-      td << content_tag(:td) do
-        branch_html = content_tag(:b, "#{@repository.identifier}@ ")
-        branch_html << links_to_branches.join(', ').html_safe
-      end
+    content_tag(:li) do
+      content = content_tag(:strong, "#{l(:label_branch)}")
+      content << " "
+      content << "#{@repository.identifier}@ "
+      content << links_to_branches.join(', ').html_safe
     end
   end
 
