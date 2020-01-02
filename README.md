@@ -1,3 +1,9 @@
+[![Maintained? No](https://img.shields.io/badge/maintained%3F-no!-red.svg)](https://shields.io/)
+# THIS PROJECT IS NO LONGER BEING MAINTAINED
+The author no longer uses Redmine and cannot effectively update and maintain this repo.
+
+* * *
+
 # Redmine Revision Branches
 
 ## Summary
